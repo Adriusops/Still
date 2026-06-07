@@ -9,7 +9,7 @@ Rails.application.routes.draw do
   # root "posts#index"
   namespace :api do
     namespace :v1 do
-      post '/login', to: 'sessions#create'
+      post "/login", to: "sessions#create"
     end
   end
 end
