@@ -11,6 +11,7 @@ Rails.application.routes.draw do
     namespace :v1 do
       post "/login", to: "sessions#create"
       get "/me", to: "users#show"
+      resources :sources, only: [ :index, :create, :update ]
     end
   end
 end
