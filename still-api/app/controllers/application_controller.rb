@@ -9,7 +9,7 @@ class ApplicationController < ActionController::API
       rescue JWT::DecodeError
         render json: { error: "Unauthorized" }, status: :unauthorized
       else
-        @current_user = User.find(decoded[:user_id])
+        @current_user = User.find(decoded["user_id"])
       end
     else
       render json: { error: "Unauthorized" }, status: :unauthorized
