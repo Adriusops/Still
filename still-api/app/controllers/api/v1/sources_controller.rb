@@ -6,7 +6,10 @@ class Api::V1::SourcesController < ApplicationController
   end
 
   def create
-    render json: current_user.sources.create(source_params)
+    source = Source.find_or_create_by(url: source_params[:url])
+    render json: current_user.subscriptions.create(source: source)
+    rescue SOURCE::DecodeError
+      render json: { error: "Failed" }, status: :Failed
   end
 
   def update
