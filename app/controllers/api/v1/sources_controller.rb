@@ -6,10 +6,17 @@ class Api::V1::SourcesController < ApplicationController
   end
 
   def create
-    source = Source.find_or_create_by(url: source_params[:url])
-    render json: current_user.subscriptions.create(source: source)
-    rescue SOURCE::DecodeError
-      render json: { error: "Failed" }, status: :Failed
+    puts source_params.inspect
+    source = Source.find_or_create_by(url: source_params[:url]) do |post|
+      post.source_type = source_params[:source_type]
+      post.name = source_params[:url]
+    end
+    subscription = current_user.subscriptions.create(source: source)
+    if subscription.persisted?
+      render json: source, status: :created
+    else
+      render json: { errors: subscription.errors.full_messages }, status: :unprocessable_entity
+    end
   end
 
   def update
@@ -25,6 +32,6 @@ class Api::V1::SourcesController < ApplicationController
   end
 
   def source_params
-    params.require(:source).permit(:url)
+    params.require(:source).permit(:url, :source_type)
   end
 end
