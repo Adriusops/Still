@@ -6,7 +6,6 @@ class Api::V1::SourcesController < ApplicationController
   end
 
   def create
-    puts source_params.inspect
     source = Source.find_or_create_by(url: source_params[:url]) do |post|
       post.source_type = source_params[:source_type]
       post.name = source_params[:url]
