@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_05_29_195155) do
+ActiveRecord::Schema[8.1].define(version: 2026_06_15_171645) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -25,7 +25,6 @@ ActiveRecord::Schema[8.1].define(version: 2026_05_29_195155) do
   end
 
   create_table "items", force: :cascade do |t|
-    t.string "author", null: false
     t.string "content"
     t.datetime "created_at", null: false
     t.integer "duration", null: false
@@ -41,7 +40,9 @@ ActiveRecord::Schema[8.1].define(version: 2026_05_29_195155) do
 
   create_table "sources", force: :cascade do |t|
     t.datetime "created_at", null: false
+    t.string "etag"
     t.string "image_url"
+    t.string "last_modified"
     t.string "name", null: false
     t.string "source_type", null: false
     t.datetime "updated_at", null: false
