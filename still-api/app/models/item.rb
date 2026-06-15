@@ -4,5 +4,4 @@ class Item < ApplicationRecord
   validates :url, presence: true, uniqueness: true
   validates :title, presence: true
   validates :source_id, presence: true
-  validates :duration, presence: true
 end
