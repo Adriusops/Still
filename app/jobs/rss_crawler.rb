@@ -10,12 +10,20 @@ class RssCrawler
     uri = URI(@source.url)
     use_ssl = (uri.scheme == "https")
 
+    request = Net::HTTP::Get.new(uri.request_uri)
+
+    request["If-None-Match"] = @source.etag if @source.etag
+    request["If-Modified-Since"] = @source.last_modified if @source.last_modified
+
     response = Net::HTTP.start(uri.host, uri.port, use_ssl: use_ssl) do |http|
-      http.get(uri.request_uri)
+      http.request(request)
     end
 
+    return if response.code == "304"
+
     @feed = Feedjira.parse(response.body)
-    @source.update(name: @feed.title)
+    @source.update(name: @feed.title, etag: response["ETag"], last_modified: response["Last-Modified"])
+
 
     items = @feed.entries
     items_type = { "article" => "Article", "podcast" => "Episode", "video" => "Video" }
