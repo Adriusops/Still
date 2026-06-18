@@ -1,5 +1,5 @@
-require 'net/http'
-require 'uri'
+require "net/http"
+require "uri"
 
 class RssCrawler
   def initialize(source)
@@ -15,6 +15,7 @@ class RssCrawler
     end
 
     @feed = Feedjira.parse(response.body)
+    @source.update(name: @feed.title)
 
     items = @feed.entries
     items_type = { "article" => "Article", "podcast" => "Episode", "video" => "Video" }
