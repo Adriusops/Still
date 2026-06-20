@@ -37,7 +37,7 @@ class RssCrawler
         post.duration = item.duration if item.respond_to?(:duration)
       end
     end
-    rescue => exception
-      warn exception.message
+  rescue => exception
+    warn exception.message
   end
 end
