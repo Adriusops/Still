@@ -14,6 +14,7 @@ Rails.application.routes.draw do
       resources :sources, only: [ :index, :create, :update ]
       resources :items, only: [ :index ]
       resources :activities, only: [ :create ]
+      resources :users, only: [ :create ]
     end
   end
 end
