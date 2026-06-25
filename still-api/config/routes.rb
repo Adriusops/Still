@@ -13,6 +13,7 @@ Rails.application.routes.draw do
       get "/me", to: "users#show"
       resources :sources, only: [ :index, :create, :update ]
       resources :items, only: [ :index ]
+      resources :activities, only: [ :create ]
     end
   end
 end
