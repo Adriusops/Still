@@ -1,6 +1,5 @@
 <img src="/logo-white.png" alt="Still logo" width="100"/>
 
-# Still.
 > "Every app on your phone is designed to steal your attention. I built one that gives it back."
 
 Still is a minimalist intentional content medium using RSS feeds built on a single conviction: consuming content should be an intentional act, not an obligation. No unread counters. No notifications. No algorithmic recommendations. No anxiety by design.
