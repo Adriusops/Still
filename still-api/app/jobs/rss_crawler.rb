@@ -7,6 +7,11 @@ class RssCrawler
   end
 
   def fetch
+    if items_type[@source.source_type].nil?
+      Rails.logger.error("Invalid source type: #{@source.source_type} for source #{@source.id}")
+      return
+    end
+
     uri = URI(@source.url)
     use_ssl = (uri.scheme == "https")
 
@@ -26,7 +31,6 @@ class RssCrawler
 
 
     items = @feed.entries
-    items_type = { "article" => "Article", "podcast" => "Episode", "video" => "Video" }
     items.each do |item|
       Item.find_or_create_by(url: item.url) do |post|
         post.source = @source
@@ -39,5 +43,9 @@ class RssCrawler
     end
   rescue => exception
     warn exception.message
+  end
+  private
+  def items_type
+    { "article" => "Article", "podcast" => "Episode", "video" => "Video" }
   end
 end
