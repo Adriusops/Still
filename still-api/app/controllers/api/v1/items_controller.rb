@@ -1,5 +1,6 @@
 class Api::V1::ItemsController < ApplicationController
   def index
-    render json: FeedComposer.compose(current_user.items)
+    items = current_user.items.order(created_at: :desc).limit(30)
+    render json: FeedComposer.compose(items)
   end
 end
