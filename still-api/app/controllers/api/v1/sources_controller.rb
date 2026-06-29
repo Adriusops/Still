@@ -6,8 +6,8 @@ class Api::V1::SourcesController < ApplicationController
   end
 
   def create
-    source = Source.find_or_create_by(url: source_params[:url]) do |post|
-      post.source_type = source_params[:source_type]
+    source = Source.find_or_create_by!(url: source_params[:url]) do |post|
+      post.source_type = SourceTypeDetector.new(post.url).detect
       post.name = source_params[:url]
     end
     subscription = current_user.subscriptions.create(source: source)
