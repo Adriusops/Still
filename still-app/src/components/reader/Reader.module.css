@@ -1,0 +1,13 @@
+.reader {
+  position: fixed;
+  inset: 0;
+  background: var(--color-bg);
+  transform: translateY(100%);
+  transition: transform var(--transition-slow);
+  overflow-y: auto;
+  z-index: 200;
+}
+
+.reader.open {
+  transform: translateY(0);
+}

@@ -1,0 +1,52 @@
+.body {
+  max-width: var(--reader-max-width);
+  margin: 0 auto;
+  padding: var(--space-6) var(--space-6) var(--space-16);
+}
+
+.title {
+  font-family: var(--font-ui);
+  font-size: var(--text-xl);
+  font-weight: 600;
+  line-height: var(--leading-ui);
+  color: var(--color-text-primary);
+  margin-bottom: var(--space-3);
+}
+
+.source {
+  font-family: var(--font-ui);
+  font-size: var(--text-sm);
+  color: var(--color-text-secondary);
+  margin-bottom: var(--space-8);
+}
+
+.content {
+  font-family: var(--font-reader);
+  font-size: var(--text-md);
+  line-height: var(--leading-reader);
+  font-optical-sizing: auto;
+  color: var(--color-text-primary);
+}
+
+.content p {
+  margin-bottom: var(--space-5);
+}
+
+.content h2,
+.content h3 {
+  font-family: var(--font-ui);
+  margin-top: var(--space-8);
+  margin-bottom: var(--space-3);
+}
+
+.content img {
+  width: 100%;
+  border-radius: var(--radius-md);
+  margin: var(--space-6) 0;
+}
+
+.content a {
+  color: var(--color-text-primary);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}

@@ -1,0 +1,10 @@
+.page {
+  min-height: 100dvh;
+  background: var(--color-bg);
+}
+
+.main {
+  max-width: var(--content-max-width);
+  margin: 0 auto;
+  padding: calc(var(--navbar-height) + var(--space-5)) var(--space-5) calc(var(--bottom-bar-height) + 40px);
+}

@@ -1,0 +1,58 @@
+:root {
+  --color-bg:               #FDFCF8;
+  --color-text-primary:     #111110;
+  --color-text-secondary:   #6B6560;
+  --color-border:           #E5E1DA;
+  --color-surface:          #F5F2EC;
+  --color-flow:             #24837B;
+  --color-flow-text:        #FDFCF8;
+
+  --font-ui:                'Inter', system-ui, sans-serif;
+  --font-reader:            'Source Serif 4', Georgia, serif;
+
+  --text-xs:                11px;
+  --text-sm:                13px;
+  --text-base:              15px;
+  --text-md:                17px;
+  --text-lg:                20px;
+  --text-xl:                24px;
+  --text-2xl:               30px;
+
+  --leading-ui:             1.4;
+  --leading-reader:         1.75;
+
+  --space-1:                4px;
+  --space-2:                8px;
+  --space-3:                12px;
+  --space-4:                16px;
+  --space-5:                20px;
+  --space-6:                24px;
+  --space-8:                32px;
+  --space-10:               40px;
+  --space-12:               48px;
+  --space-16:               64px;
+
+  --radius-sm:              6px;
+  --radius-md:              10px;
+  --radius-lg:              16px;
+  --radius-pill:            999px;
+
+  --transition-fast:        150ms ease-out;
+  --transition-base:        250ms ease-out;
+  --transition-slow:        350ms ease-out;
+
+  --bottom-bar-height:      52px;
+  --navbar-height:          52px;
+  --content-max-width:      680px;
+  --reader-max-width:       600px;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-bg:             #141210;
+    --color-text-primary:   #F0EDE6;
+    --color-text-secondary: #9A9088;
+    --color-border:         #2A2522;
+    --color-surface:        #1E1A16;
+  }
+}
