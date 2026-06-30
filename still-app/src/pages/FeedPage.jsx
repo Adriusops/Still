@@ -15,14 +15,21 @@ export default function FeedPage() {
   const [selectedItem, setSelectedItem] = useState(null)
   const [readerOpen, setReaderOpen] = useState(false)
   const [sheetOpen, setSheetOpen] = useState(false)
+  const [feedKey, setFeedKey] = useState(0)
+  const [feedVisible, setFeedVisible] = useState(true)
 
   function handleSelectItem(item) {
     setSelectedItem(item)
     setReaderOpen(true)
+    setFeedVisible(false)
   }
 
   function handleCloseReader() {
     setReaderOpen(false)
+    setTimeout(() => {
+      setFeedKey(k => k + 1)
+      setFeedVisible(true)
+    }, 240)
   }
 
   async function handleAddSource(url) {
@@ -34,7 +41,7 @@ export default function FeedPage() {
     <div className={styles.page}>
       <Sidebar hidden={readerOpen} />
       <Navbar onAddSource={() => setSheetOpen(true)} hidden={readerOpen} />
-      <main className={styles.main}>
+      <main key={feedKey} className={styles.main} style={{ visibility: feedVisible ? 'visible' : 'hidden' }}>
         <Feed
           items={items}
           loading={loading}

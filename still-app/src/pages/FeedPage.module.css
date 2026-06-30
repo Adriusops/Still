@@ -14,7 +14,8 @@
 
 @media (min-width: 768px) {
   .main {
-    padding-top: var(--space-8);
+    padding-top: calc(var(--navbar-height) + var(--space-8));
+    padding-left: calc(48px + var(--space-5));
   }
 }
 

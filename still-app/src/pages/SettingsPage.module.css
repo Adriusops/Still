@@ -6,7 +6,7 @@
 .main {
   max-width: var(--content-max-width);
   margin: 0 auto;
-  padding: calc(var(--navbar-height) + var(--space-5)) var(--space-5) calc(var(--bottom-bar-height) + 40px);
+  padding: calc(var(--navbar-height) + var(--space-8)) var(--space-5) calc(var(--bottom-bar-height) + 40px);
   opacity: 0;
   filter: blur(6px);
   animation: fadeIn var(--duration-appear) var(--ease-apple) forwards;
@@ -14,7 +14,8 @@
 
 @media (min-width: 768px) {
   .main {
-    padding-top: var(--space-8);
+    padding-top: calc(var(--navbar-height) + var(--space-8));
+    padding-left: calc(48px + var(--space-5));
   }
 }
 

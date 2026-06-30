@@ -1,27 +1,23 @@
 import styles from './FeedItem.module.css'
 
-function getDomain(url) {
-  try { return new URL(url).hostname.replace(/^www\./, '') } catch { return null }
+function estimateReadingTime(content) {
+  if (!content) return null
+  const words = content.replace(/<[^>]*>/g, '').trim().split(/\s+/).length
+  const minutes = Math.ceil(words / 200)
+  return minutes < 1 ? null : `${minutes} min`
 }
 
 function typeLabel(type) {
   const map = { Article: 'Article', Video: 'Vidéo', Episode: 'Podcast' }
-  return map[type] || type
-}
-
-function getRelativeDays(dateStr) {
-  if (!dateStr) return null
-  const diff = Math.floor((Date.now() - new Date(dateStr)) / 86400000)
-  if (diff === 0) return "aujourd'hui"
-  if (diff === 1) return 'hier'
-  return `il y a ${diff} j`
+  return map[type] || null
 }
 
 export default function FeedItem({ item, onClick, index = 0 }) {
-  const domain = getDomain(item.url)
-  const age = getRelativeDays(item.published_at)
-  const imageUrl = item.image_url
+  const readingTime = estimateReadingTime(item.content)
+  const type = typeLabel(item.type)
   const delay = Math.min(index * 40, 400)
+
+  const meta = [type, readingTime].filter(Boolean).join(' · ')
 
   return (
     <article
@@ -30,31 +26,16 @@ export default function FeedItem({ item, onClick, index = 0 }) {
       onClick={() => onClick(item)}
     >
       <div className={styles.content}>
-        <div className={styles.sourceLine}>
-          {domain && (
-            <img
-              className={styles.favicon}
-              src={`https://www.google.com/s2/favicons?domain=${domain}&sz=16`}
-              alt=""
-              width={12}
-              height={12}
-            />
-          )}
-          {item.source_name && <span className={styles.sourceName}>{item.source_name}</span>}
-          {domain && <span className={styles.separator}>·</span>}
-          {domain && <span className={styles.domain}>{domain}</span>}
-        </div>
+        {item.source_name && (
+          <span className={styles.source}>{item.source_name}</span>
+        )}
         <h2 className={styles.title}>{item.title}</h2>
-        <div className={styles.bottomLine}>
-          {item.type && <span className={styles.type}>{typeLabel(item.type)}</span>}
-          {item.type && age && <span className={styles.separator}>·</span>}
-          {age && <span className={styles.age}>{age}</span>}
-        </div>
+        {meta && <span className={styles.meta}>{meta}</span>}
       </div>
-      {imageUrl && (
+      {item.image_url && (
         <img
           className={styles.thumbnail}
-          src={imageUrl}
+          src={item.image_url}
           alt=""
           width={80}
           height={80}
