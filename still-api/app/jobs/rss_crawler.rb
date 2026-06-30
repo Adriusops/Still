@@ -35,8 +35,10 @@ class RssCrawler
       Item.find_or_create_by(url: item.url) do |post|
         post.source = @source
         post.url = item.url
+        post.image_url = item.image if item.respond_to?(:image)
         post.title = item.title
         post.type = items_type[@source.source_type]
+        post.published_at = item.published if item.respond_to?(:published)
         post.content = item.summary
         post.duration = item.duration if item.respond_to?(:duration)
       end
