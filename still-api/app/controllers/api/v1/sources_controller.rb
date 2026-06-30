@@ -12,6 +12,7 @@ class Api::V1::SourcesController < ApplicationController
     end
     subscription = current_user.subscriptions.create(source: source)
     if subscription.persisted?
+      RssCrawler.new(source).fetch
       render json: source, status: :created
     else
       render json: { errors: subscription.errors.full_messages }, status: :unprocessable_entity
