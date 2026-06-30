@@ -39,7 +39,7 @@ class RssCrawler
         post.title = item.title
         post.type = items_type[@source.source_type]
         post.published_at = item.published if item.respond_to?(:published)
-        post.content = item.summary
+        post.content = item.content || item.summary
         post.duration = item.duration if item.respond_to?(:duration)
       end
     end
