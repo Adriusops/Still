@@ -243,6 +243,20 @@ Format : contexte → options → choix → pourquoi.
  
 ---
  
+## 019 — Pas de limite arbitraire sur le nombre d'items du feed
+
+**Contexte** : `ItemsController#index` limitait le feed à 30 items (`.limit(30)`). En testant avec plusieurs sources réelles, une source ayant publié beaucoup de contenu récemment monopolisait la fenêtre de 30 items — `FeedComposer` ne peut alterner que ce qu'on lui donne, donc l'alternance par source tombait à plat. La limite causait exactement le comportement qu'on cherchait à éviter.
+
+**Options** :
+- Garder `.limit(30)` avec pagination infinite scroll → complexifie l'alternance entre pages et contredit l'esprit "pas de fil sans fin"
+- Supprimer toute limite → le contenu disponible est borné naturellement par les sources choisies par l'utilisateur
+
+**Choix** : Aucune limite technique sur le nombre d'items retournés. Introduction d'un service `FeedBalancer` qui garantit une représentation équilibrée par source avant que `FeedComposer` alterne, pour que l'alternance fonctionne correctement même avec un grand volume d'items.
+
+**Pourquoi** : Le contenu du feed est fini par construction — il est limité aux sources choisies par l'utilisateur et au temps de publication de ces sources. Ce n'est pas un fil infini algorithmique, c'est un bac fini et choisi. Une limite arbitraire de 30 créait un artefact technique (monopolisation d'une source prolifique) sans bénéfice utilisateur réel. Cohérent avec la philosophie "tu ne peux jamais être en retard dans Still" : l'utilisateur accède à tout ce qu'il a choisi de recevoir, pas à une fenêtre tronquée.
+
+---
+ 
 # DESIGN
  
 ---
