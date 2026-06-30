@@ -16,11 +16,16 @@
 }
 
 .logo {
-  font-family: var(--font-ui);
-  font-size: var(--text-2xl);
-  font-weight: 700;
-  color: var(--color-text-primary);
-  text-align: center;
+  height: auto;
+  width: 120px;
+  display: block;
+  margin: 0 auto;
+}
+
+@media (prefers-color-scheme: dark) {
+  .logo {
+    filter: invert(1);
+  }
 }
 
 .tagline {
@@ -42,4 +47,17 @@
   font-size: var(--text-sm);
   color: var(--color-text-secondary);
   text-align: center;
+}
+
+.switch {
+  font-family: var(--font-ui);
+  font-size: var(--text-sm);
+  color: var(--color-text-secondary);
+  text-align: center;
+}
+
+.switchLink {
+  color: var(--color-text-primary);
+  text-decoration: underline;
+  text-underline-offset: 3px;
 }

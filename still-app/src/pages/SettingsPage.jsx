@@ -1,34 +1,39 @@
-import { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import Navbar from '../components/layout/Navbar'
 import BottomBar from '../components/layout/BottomBar'
 import Sidebar from '../components/layout/Sidebar'
-import SourcesList from '../components/sources/SourcesList'
-import AddSourceSheet from '../components/sources/AddSourceSheet'
-import { useSources } from '../hooks/useSources'
+import Button from '../components/ui/Button'
+import { useAuth } from '../hooks/useAuth'
 import styles from './SettingsPage.module.css'
 
 export default function SettingsPage() {
-  const { sources, loading, addSource, updateSource } = useSources()
-  const [sheetOpen, setSheetOpen] = useState(false)
+  const navigate = useNavigate()
+  const { user, logout } = useAuth()
+
+  function handleLogout() {
+    logout()
+    navigate('/login')
+  }
 
   return (
     <div className={styles.page}>
       <Sidebar hidden={false} />
-      <Navbar onAddSource={() => setSheetOpen(true)} hidden={false} />
+      <Navbar hidden={false} />
       <main className={styles.main}>
-        <h1 className={styles.heading}>Sources</h1>
-        {loading ? (
-          <p className={styles.loading}>Chargement…</p>
-        ) : (
-          <SourcesList sources={sources} onUpdate={updateSource} />
-        )}
+        <section>
+          <h2 className={styles.sectionTitle}>Compte</h2>
+          <div className={styles.row}>
+            <span className={styles.label}>Email</span>
+            <span className={styles.value}>{user?.email || '—'}</span>
+          </div>
+        </section>
+        <section className={styles.section}>
+          <Button variant="ghost" onClick={handleLogout}>
+            Se déconnecter
+          </Button>
+        </section>
       </main>
       <BottomBar hidden={false} />
-      <AddSourceSheet
-        open={sheetOpen}
-        onClose={() => setSheetOpen(false)}
-        onAdd={addSource}
-      />
     </div>
   )
 }

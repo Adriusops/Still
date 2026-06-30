@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, Link } from 'react-router-dom'
 import Button from '../components/ui/Button'
 import Input from '../components/ui/Input'
 import { useAuth } from '../hooks/useAuth'
@@ -24,7 +24,7 @@ export default function LoginPage() {
   return (
     <div className={styles.page}>
       <div className={styles.inner}>
-        <h1 className={styles.logo}>Still.</h1>
+        <img src="/logo-black.png" alt="Still." className={styles.logo} />
         <p className={styles.tagline}>Lisez ce qui compte.</p>
         <form onSubmit={handleSubmit} className={styles.form}>
           <Input
@@ -46,6 +46,10 @@ export default function LoginPage() {
             {loading ? 'Connexion…' : 'Se connecter'}
           </Button>
         </form>
+        <p className={styles.switch}>
+          Pas encore de compte ?{' '}
+          <Link to="/register" className={styles.switchLink}>S'inscrire</Link>
+        </p>
       </div>
     </div>
   )
