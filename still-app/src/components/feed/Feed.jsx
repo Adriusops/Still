@@ -12,8 +12,8 @@ export default function Feed({ items, loading, onSelectItem, onAddSource }) {
 
   return (
     <div className={styles.feed}>
-      {items.map(item => (
-        <FeedItem key={item.id} item={item} onClick={onSelectItem} />
+      {items.map((item, i) => (
+        <FeedItem key={item.id} item={item} onClick={onSelectItem} index={i} />
       ))}
     </div>
   )

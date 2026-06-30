@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import Navbar from '../components/layout/Navbar'
 import BottomBar from '../components/layout/BottomBar'
+import Sidebar from '../components/layout/Sidebar'
 import Feed from '../components/feed/Feed'
 import Reader from '../components/reader/Reader'
 import AddSourceSheet from '../components/sources/AddSourceSheet'
@@ -31,6 +32,7 @@ export default function FeedPage() {
 
   return (
     <div className={styles.page}>
+      <Sidebar hidden={readerOpen} />
       <Navbar onAddSource={() => setSheetOpen(true)} hidden={readerOpen} />
       <main className={styles.main}>
         <Feed

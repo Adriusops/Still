@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import Navbar from '../components/layout/Navbar'
 import BottomBar from '../components/layout/BottomBar'
+import Sidebar from '../components/layout/Sidebar'
 import SourcesList from '../components/sources/SourcesList'
 import AddSourceSheet from '../components/sources/AddSourceSheet'
 import { useSources } from '../hooks/useSources'
@@ -12,6 +13,7 @@ export default function SettingsPage() {
 
   return (
     <div className={styles.page}>
+      <Sidebar hidden={false} />
       <Navbar onAddSource={() => setSheetOpen(true)} hidden={false} />
       <main className={styles.main}>
         <h1 className={styles.heading}>Sources</h1>
