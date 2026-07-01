@@ -10,15 +10,8 @@
   font-family: var(--font-ui);
   font-size: var(--text-sm);
   font-weight: 500;
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity 280ms ease-out, color var(--transition-fast);
   white-space: nowrap;
-}
-
-.backBtn.backVisible {
-  opacity: 1;
-  pointer-events: auto;
+  transition: color var(--transition-fast);
 }
 
 .backBtn:hover {
@@ -36,68 +29,10 @@
   }
 }
 
-@media (prefers-reduced-motion: reduce) {
-  .backBtn {
-    transition: none;
-  }
-}
-
-.overlay {
-  position: fixed;
-  inset: 0;
-  background: var(--color-text-primary);
-  opacity: 0;
-  pointer-events: none;
-  z-index: 199;
-  transition: opacity 280ms ease-out;
-}
-
-.overlay.visible {
-  opacity: 0.08;
-  pointer-events: none;
-}
-
 .reader {
   position: fixed;
   inset: 0;
   background: var(--color-bg);
-  opacity: 0;
-  filter: blur(8px);
-  transform: scale(0.99);
-  pointer-events: none;
-  transition:
-    opacity var(--duration-appear) var(--ease-apple),
-    filter var(--duration-appear) var(--ease-apple),
-    transform var(--duration-appear) var(--ease-apple);
   overflow-y: auto;
   z-index: 200;
-}
-
-.reader.open {
-  opacity: 1;
-  filter: blur(0px);
-  transform: scale(1);
-  pointer-events: auto;
-}
-
-.reader.closing {
-  opacity: 0;
-  filter: blur(8px);
-  transform: scale(0.99);
-  transition:
-    opacity var(--duration-disappear) var(--ease-apple),
-    filter var(--duration-disappear) var(--ease-apple),
-    transform var(--duration-disappear) var(--ease-apple);
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .overlay,
-  .overlay.visible,
-  .reader,
-  .reader.open,
-  .reader.closing {
-    transition: none;
-    transform: none;
-    filter: none;
-  }
 }

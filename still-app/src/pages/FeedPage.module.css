@@ -7,28 +7,11 @@
   max-width: var(--content-max-width);
   margin: 0 auto;
   padding: calc(var(--navbar-height) + var(--space-5)) var(--space-5) calc(var(--bottom-bar-height) + 40px);
-  opacity: 0;
-  filter: blur(6px);
-  animation: fadeIn var(--duration-appear) var(--ease-apple) forwards;
+  will-change: opacity;
 }
 
 @media (min-width: 768px) {
   .main {
     padding-top: calc(var(--navbar-height) + var(--space-8));
-  }
-}
-
-@keyframes fadeIn {
-  to {
-    opacity: 1;
-    filter: blur(0px);
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .main {
-    animation: none;
-    opacity: 1;
-    filter: none;
   }
 }

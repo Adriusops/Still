@@ -1,3 +1,4 @@
+import { motion } from 'framer-motion'
 import styles from './FeedItem.module.css'
 
 function estimateReadingTime(content) {
@@ -12,18 +13,19 @@ function typeLabel(type) {
   return map[type] || null
 }
 
-export default function FeedItem({ item, onClick, index = 0 }) {
+export default function FeedItem({ item, onClick }) {
   const readingTime = estimateReadingTime(item.content)
   const type = typeLabel(item.type)
-  const delay = Math.min(index * 40, 400)
-
   const meta = [type, readingTime].filter(Boolean).join(' · ')
 
   return (
-    <article
+    <motion.article
       className={styles.item}
-      style={{ animationDelay: `${delay}ms` }}
       onClick={() => onClick(item)}
+      animate={{ x: 0 }}
+      transition={{ x: { duration: 0.15, ease: [0.25, 0.46, 0.45, 0.94] } }}
+      whileHover={{ x: 3 }}
+      whileTap={{ x: 6, transition: { duration: 0.08 } }}
     >
       <div className={styles.content}>
         {item.source_name && (
@@ -41,6 +43,6 @@ export default function FeedItem({ item, onClick, index = 0 }) {
           height={80}
         />
       )}
-    </article>
+    </motion.article>
   )
 }

@@ -12,16 +12,43 @@ export default function ReaderBody({ item }) {
     })()
 
     contentRef.current.querySelectorAll('img').forEach(img => {
-      if (origin && img.src && !img.src.startsWith('http')) {
+      if (origin && img.getAttribute('src') && !img.getAttribute('src').startsWith('http')) {
         img.src = origin + img.getAttribute('src')
       }
+      img.setAttribute('loading', 'lazy')
+      img.setAttribute('referrerpolicy', 'no-referrer')
+      img.removeAttribute('crossorigin')
       img.onerror = () => { img.style.display = 'none' }
+    })
+
+    // Vidéos natives — fix sources relatives + reset styles inline
+    contentRef.current.querySelectorAll('video').forEach(video => {
+      video.removeAttribute('width')
+      video.removeAttribute('height')
+      video.removeAttribute('style')
+      video.querySelectorAll('source').forEach(source => {
+        const src = source.getAttribute('src')
+        if (origin && src && !src.startsWith('http')) {
+          source.setAttribute('src', origin + src)
+        }
+      })
+      video.addEventListener('error', () => { video.style.display = 'none' }, true)
+    })
+
+    // iframes (YouTube, etc.) — reset styles inline qui débordent
+    contentRef.current.querySelectorAll('iframe').forEach(iframe => {
+      iframe.removeAttribute('width')
+      iframe.removeAttribute('height')
+      iframe.removeAttribute('style')
+      iframe.setAttribute('allowfullscreen', '')
     })
 
     contentRef.current.querySelectorAll('a').forEach(a => {
       a.setAttribute('target', '_blank')
       a.setAttribute('rel', 'noopener noreferrer')
-      if (!a.querySelector('.ext-arrow')) {
+      // Ne pas ajouter la flèche sur les liens qui ne contiennent que des images
+      const hasOnlyImage = a.children.length > 0 && Array.from(a.children).every(c => c.tagName === 'IMG')
+      if (!hasOnlyImage && !a.querySelector('.ext-arrow') && a.textContent.trim()) {
         const arrow = document.createElementNS('http://www.w3.org/2000/svg', 'svg')
         arrow.setAttribute('class', 'ext-arrow')
         arrow.setAttribute('width', '11')

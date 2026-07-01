@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { motion, AnimatePresence } from 'framer-motion'
 import Navbar from '../components/layout/Navbar'
 import BottomBar from '../components/layout/BottomBar'
 import Sidebar from '../components/layout/Sidebar'
@@ -9,27 +10,24 @@ import { useFeed } from '../hooks/useFeed'
 import { useSources } from '../hooks/useSources'
 import styles from './FeedPage.module.css'
 
+const ease = [0.4, 0, 0.2, 1]
+
 export default function FeedPage() {
   const { items, loading, refresh } = useFeed()
   const { addSource } = useSources()
   const [selectedItem, setSelectedItem] = useState(null)
   const [readerOpen, setReaderOpen] = useState(false)
   const [sheetOpen, setSheetOpen] = useState(false)
-  const [feedKey, setFeedKey] = useState(0)
-  const [feedVisible, setFeedVisible] = useState(true)
+  const [feedReveal, setFeedReveal] = useState(0)
 
   function handleSelectItem(item) {
     setSelectedItem(item)
     setReaderOpen(true)
-    setFeedVisible(false)
   }
 
   function handleCloseReader() {
     setReaderOpen(false)
-    setTimeout(() => {
-      setFeedKey(k => k + 1)
-      setFeedVisible(true)
-    }, 240)
+    setFeedReveal(n => n + 1)
   }
 
   async function handleAddSource(url) {
@@ -41,14 +39,19 @@ export default function FeedPage() {
     <div className={styles.page}>
       <Sidebar hidden={readerOpen} />
       <Navbar onAddSource={() => setSheetOpen(true)} hidden={readerOpen} />
-      <main key={feedKey} className={styles.main} style={{ visibility: feedVisible ? 'visible' : 'hidden' }}>
+      <motion.main
+        className={styles.main}
+        animate={{ opacity: readerOpen ? 0 : 1 }}
+        transition={{ duration: 0.28, ease }}
+      >
         <Feed
+          key={feedReveal}
           items={items}
           loading={loading}
           onSelectItem={handleSelectItem}
           onAddSource={() => setSheetOpen(true)}
         />
-      </main>
+      </motion.main>
       <BottomBar hidden={readerOpen} />
       <Reader item={selectedItem} open={readerOpen} onClose={handleCloseReader} />
       <AddSourceSheet

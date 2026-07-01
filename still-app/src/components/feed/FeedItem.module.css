@@ -5,28 +5,10 @@
   padding: var(--space-5) 0;
   border-bottom: 1px solid var(--color-border);
   cursor: pointer;
-  opacity: 0;
-  filter: blur(4px);
-  animation: itemIn var(--duration-appear) var(--ease-apple) forwards;
 }
 
 .item:last-child {
   border-bottom: none;
-}
-
-@keyframes itemIn {
-  to {
-    opacity: 1;
-    filter: blur(0px);
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .item {
-    animation: none;
-    opacity: 1;
-    filter: none;
-  }
 }
 
 .content {
