@@ -1,4 +1,5 @@
 .page {
+  position: relative;
   min-height: 100dvh;
   background: var(--color-bg);
   display: flex;
@@ -8,6 +9,8 @@
 }
 
 .inner {
+  position: relative;
+  z-index: 1;
   width: 100%;
   max-width: 360px;
   display: flex;

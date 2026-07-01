@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { useNavigate, Link } from 'react-router-dom'
 import Button from '../components/ui/Button'
 import Input from '../components/ui/Input'
+import AuthBackground from '../components/ui/AuthBackground'
 import { useAuth } from '../hooks/useAuth'
 import styles from './LoginPage.module.css'
 
@@ -23,6 +24,7 @@ export default function LoginPage() {
 
   return (
     <div className={styles.page}>
+      <AuthBackground />
       <div className={styles.inner}>
         <img src="/logo-black.png" alt="Still." className={styles.logo} />
         <p className={styles.tagline}>Lisez ce qui compte.</p>
