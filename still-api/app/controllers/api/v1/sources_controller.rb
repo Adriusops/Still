@@ -12,6 +12,7 @@ class Api::V1::SourcesController < ApplicationController
     end
     subscription = current_user.subscriptions.create(source: source)
     if subscription.persisted?
+      source.update(etag: nil, last_modified: nil) if source.items.empty?
       RssCrawler.new(source).fetch
       render json: source, status: :created
     else
