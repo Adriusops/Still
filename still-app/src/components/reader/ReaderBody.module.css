@@ -73,6 +73,7 @@
   text-underline-offset: 3px;
   text-decoration-color: var(--color-border);
   transition: color var(--transition-fast), text-decoration-color var(--transition-fast);
+  touch-action: pan-y;
 }
 
 .content a:hover {

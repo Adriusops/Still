@@ -35,4 +35,5 @@
   background: var(--color-bg);
   overflow-y: auto;
   z-index: 200;
+  touch-action: pan-y;
 }
