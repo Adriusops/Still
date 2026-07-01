@@ -1,10 +1,25 @@
 <!doctype html>
-<html lang="en">
+<html lang="fr">
   <head>
     <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+
+    <title>Still.</title>
+    <meta name="description" content="Lisez ce qui compte. Rien de plus." />
+
+    <!-- PWA / Android -->
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>still-app</title>
+    <meta name="theme-color" content="#FDFCF8" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#141210" media="(prefers-color-scheme: dark)" />
+
+    <!-- PWA / iOS -->
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+    <meta name="apple-mobile-web-app-title" content="Still." />
+    <link rel="apple-touch-icon" href="/icon-192.png" />
+
+    <!-- iOS splash screens (portrait uniquement, tailles principales) -->
+    <link rel="apple-touch-startup-image" href="/icon-512.png" />
   </head>
   <body>
     <div id="root"></div>
