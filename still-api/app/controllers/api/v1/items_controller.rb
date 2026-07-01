@@ -4,7 +4,8 @@ class Api::V1::ItemsController < ApplicationController
       render json: FeedComposer.compose(items).map { |i|
         i.as_json.merge(
           type: i.type,
-          source_name: i.source.name
+          source_name: i.source.name,
+          source_url: i.source.url
         )
       }
     end
